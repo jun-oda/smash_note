@@ -11,6 +11,31 @@
   </head>
 
   <body>
-    <%= yield %>
+  <header>
+      <nav>
+          <% if user_signed_in? %>
+            <strong><%= link_to current_user.username, pages_show_path %></strong>
+            <%= link_to 'プロフィール変更', edit_user_registration_path %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'サインアップ', new_user_registration_path %>
+            <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+      </nav>
+  </header>
+
+  <% if flash[:success] %>
+  <div class="alert alert-success"><%= success %></div>
+  <% end %>
+  <% if flash[:error] %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-warning"><%= alert %></div>
+  <% end %>
+  <% if flash[:notice] %>
+    <div class="alert alert-info"><%= notice %></div>
+  <% end %>
+  <%= yield %>
   </body>
 </html>
