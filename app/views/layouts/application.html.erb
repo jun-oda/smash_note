@@ -11,8 +11,8 @@
   </head>
 
   <body>
-  <header>
-      <nav>
+  <!--<header>
+    <nav>
           <% if user_signed_in? %>
             <strong><%= link_to current_user.username, pages_show_path %></strong>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
@@ -22,10 +22,32 @@
             <%= link_to 'ログイン', new_user_session_path %>
           <% end %>
       </nav>
-  </header>
+  </header>-->
+
+  <header class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to "Smash Share Note", root_path, class:"navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <li><%= link_to 'トップページ', root_path %></li>
+          <li><%= link_to 'マイページ', pages_show_path %></li>
+          <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to '新規ユーザー登録', new_user_registration_path %></li>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>
 
   <% if flash[:success] %>
-  <div class="alert alert-success"><%= success %></div>
+  <div class="alert   alert-success"><%= success %></div>
   <% end %>
   <% if flash[:error] %>
     <div class="alert alert-danger"><%= error %></div>
