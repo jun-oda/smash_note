@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="form-heading">対策ノートを作成</h1>
+    <%= form_tag(pages_path) do %>
+      <div class="form">
+        <div class="form-body">
+          <textarea name="content"><%= @usernote.content1 %></textarea>
+            <input type="submit" value="保存">
+        </div>  
+      </div>
+    <% end %>
+</div>
