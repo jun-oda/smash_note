@@ -1,6 +1,10 @@
 <h1><%= current_user.username %>'s キャラ対策ノート</h1>
 <div class="container-fluid">
   <% @characters.each do |character| %>
-    <%= link_to image_tag(character.image, size:"70x70"), new_page_path %>
+    <% if UserNote.where(character_id: character.id, user_id: current_user.id).present? %>
+      <%= link_to image_tag(character.image, size:"70x70"), edit_page_path(character.id) %>
+    <% else %>
+      <%= link_to image_tag(character.image, size:"70x70"), new_page_path %>
+    <% end %>  
   <% end %>
 </div> 

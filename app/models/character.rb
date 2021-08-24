@@ -1,3 +1,3 @@
 class Character < ApplicationRecord
-    has_many :user_notes
+    belongs_to :user, optional: true
 end

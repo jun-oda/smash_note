@@ -6,22 +6,32 @@ class PagesController < ApplicationController
     @characters = Character.all
   end
 
-  def show
-    
-  end
-
   def new
     @usernote = UserNote.new
   end
 
-  def create
+  def edit
+    @character = Character.find(params[:id])
   end
 
-  def edit
-    
+  def create
+    @usernote = UserNote.new(usernote_params)
+    if @usernote.save
+      flash[:notice] = "編集が完了しました"
+      redirect_to(edit_page_path(@character.id))
+    else
+      render(edit_page_path(@character.id))
+    end
   end
 
   def update
+    @character = Character.find(params[:id])
+    if @usernote.update(usernote_params)
+      flash[:notice] = "編集が完了しました"
+      redirect_to(edit_page_path(@character.id))
+    else
+      render(edit_page_path(@character.id))
+    end  
   end
 
   def delete
@@ -33,6 +43,6 @@ class PagesController < ApplicationController
     end
 
     def usernote_params
-      params.require(:admin).permit(:name, :email)
+      params.require(:user_note).permit(:content1, :content2, :content3, :content4)
     end
 end    

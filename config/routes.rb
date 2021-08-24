@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :admins
   resources :pages
+  resources :user_notes
   devise_for :users
   
   root 'top#index'
