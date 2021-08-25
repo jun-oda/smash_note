@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def new
+    @character = Character.find(params[:character_id])
     @usernote = UserNote.new
   end
 

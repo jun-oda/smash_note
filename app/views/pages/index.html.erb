@@ -1,11 +1,11 @@
 <h1><%= current_user.username %>'s キャラ対策ノート</h1>
 <div class="container-fluid">
   <% @characters.each do |character| %>
-    <% if UserNote.where(character_id: character.id, user_id: current_user.id).present? %>
+    <% if UserNote.where(character_id: character.id, user_id: current_user.id).exists? %>
       <%= link_to image_tag(character.image, size:"70x70"), edit_page_path(character.id) %>
     <% else %>
       
-      <%= link_to image_tag(character.image, size:"70x70"), new_page_path %>
+      <%= link_to image_tag(character.image, size:"70x70"), new_page_path(character_id: character.id) %>
     <% end %>  
   <% end %>
 </div> 

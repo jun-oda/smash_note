@@ -1,6 +1,6 @@
 <div class="container">
     <div class = "text-center">
-    
+    <h2 class="form-heading"><%= image_tag(@character.image, size:"50x50") %><%= @character.name %></h2><br/>
         <%= form_with model: @usernote, url: "/pages", method: :post do |form| %>
           <%= form.label "1.ゲームメイク" %><br/>
           <div class="row"><%= form.text_field :content1 %></div><br/>
@@ -13,6 +13,8 @@
                 
           <%= form.label "4.その他注意点" %><br/>
           <div class="row"><%= form.text_field :content4 %></div><br/>
+
+          <%= form.hidden_field :character_id, :value => @character.id %>
 
           <%= form.submit %>  
         <% end %>
