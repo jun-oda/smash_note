@@ -14,6 +14,8 @@
           <%= form.label "4.その他注意点" %><br/>
           <div class="row"><%= form.text_field :content4 %></div><br/>
 
+          <%= form.hidden_field :character_id, :value => @character.id %>
+
           <%= form.submit %>  
         <% end %>
      
