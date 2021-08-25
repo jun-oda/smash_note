@@ -16,21 +16,21 @@ class PagesController < ApplicationController
 
   def create
     @usernote = UserNote.new(usernote_params)
+    
     if @usernote.save
       flash[:notice] = "編集が完了しました"
-      redirect_to(edit_page_path(@character.id))
+      redirect_to(pages_path)
     else
-      render(edit_page_path(@character.id))
+      render(new_page_path)
     end
   end
 
   def update
-    @character = Character.find(params[:id])
     if @usernote.update(usernote_params)
       flash[:notice] = "編集が完了しました"
-      redirect_to(edit_page_path(@character.id))
+      redirect_to(pages_path)
     else
-      render(edit_page_path(@character.id))
+      render(edit_page_path)
     end  
   end
 
@@ -43,6 +43,8 @@ class PagesController < ApplicationController
     end
 
     def usernote_params
-      params.require(:user_note).permit(:content1, :content2, :content3, :content4)
+      params.require(:user_note)
+      .permit(:character_id, :content1, :content2, :content3, :content4)
+      .merge(user_id: current_user.id)
     end
 end    
