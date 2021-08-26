@@ -35,12 +35,9 @@ class PagesController < ApplicationController
     end  
   end
 
-  def delete
-  end
-
   private
     def set_usernote
-      @usernote = UserNote.find_by(character_id: params[:id])
+      @usernote = UserNote.find_by(character_id: params[:id], user_id: current_user)
     end
 
     def usernote_params
